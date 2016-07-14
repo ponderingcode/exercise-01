@@ -1,7 +1,3 @@
-$(document).ready(function() {
-    
-});
-
 // Fake constants
 var OPERATION_TYPE_LEAST = 'operationTypeLeast';
 var OPERATION_TYPE_GREATEST = 'operationTypeGreatest';
@@ -16,52 +12,80 @@ var val1;
 var val2;
 var val3;
 var val4;
+var arrValues;
+
+var least;
+var greatest;
+var mean;
+var sum;
+var product;
+
 
 function onSubmitButtonPressed() {
     operationType = $('#selectOperation').val();
     
-    val0 = $('#inp0').val();
-    val1 = $('#inp1').val();
-    val2 = $('#inp2').val();
-    val3 = $('#inp3').val();
-    val4 = $('#inp4').val();
+    val0 = parseInt($('#inp0').val());
+    val1 = parseInt($('#inp1').val());
+    val2 = parseInt($('#inp2').val());
+    val3 = parseInt($('#inp3').val());
+    val4 = parseInt($('#inp4').val());
+    
+    arrValues = [val0, val1, val2, val3, val4];
 
     switch(operationType) {
-        default:
         case OPERATION_TYPE_LEAST:
-            // call least func
-            break:
+            determineLeast();
+            break;
         case OPERATION_TYPE_GREATEST:
-            // call greatest func
+            determineGreatest();
             break;
         case OPERATION_TYPE_MEAN:
-            // call mean func
+            determineMean();
             break;
         case OPERATION_TYPE_SUM:
-            // call sum func
+            determineSum();
             break;
         case OPERATION_TYPE_PRODUCT:
-            // call product func
+            determineProduct();
+            break;
+        default:
             break;
     }
 }
 
 function determineLeast() {
-    
+    arrValues.sort();
+    least = arrValues[0];
+    alert('Least: ' + least);
 }
 
 function determineGreatest() {
-    
+    arrValues.sort();
+    greatest = arrValues[4];
+    alert('Greatest: ' + greatest);
 }
 
 function determineMean() {
-    
+    mean = 0;
+    for (var i=0; i < arrValues.length; i++) {
+        mean += arrValues[i];
+    }
+    mean /= arrValues.length;
+    alert('Mean: ' + mean);
 }
 
 function determineSum() {
-    
+    sum = 0;
+    for (var i=0; i < arrValues.length; i++) {
+        sum += arrValues[i];
+    }
+    alert('Sum: ' + sum);
 }
 
 function determineProduct() {
-    
+    product = 1;
+    for (var i=0; i < arrValues.length; i++) {
+        product *= arrValues[i];
+    }
+    alert('Product: ' + product);
 }
