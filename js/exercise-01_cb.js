@@ -64,7 +64,7 @@ function determineLeast() {
 }
 
 function determineGreatest() {
-    arrValues.sort();
+    arrValues.sort(compareNumbers);
     arrValues.reverse();
     greatest = arrValues[0];
     alert('Greatest: ' + greatest);
