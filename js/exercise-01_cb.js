@@ -1,9 +1,8 @@
-// Fake constants
-var OPERATION_TYPE_LEAST = 'operationTypeLeast';
-var OPERATION_TYPE_GREATEST = 'operationTypeGreatest';
-var OPERATION_TYPE_MEAN = 'operationTypeMean';
-var OPERATION_TYPE_SUM = 'operationTypeSum';
-var OPERATION_TYPE_PRODUCT = 'operationTypeProduct';
+const OPERATION_TYPE_LEAST = 'operationTypeLeast';
+const OPERATION_TYPE_GREATEST = 'operationTypeGreatest';
+const OPERATION_TYPE_MEAN = 'operationTypeMean';
+const OPERATION_TYPE_SUM = 'operationTypeSum';
+const OPERATION_TYPE_PRODUCT = 'operationTypeProduct';
 
 var operationType;
 
