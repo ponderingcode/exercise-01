@@ -53,15 +53,20 @@ function onSubmitButtonPressed() {
     }
 }
 
+function compareNumbers(a, b) {
+    return a - b;
+}
+
 function determineLeast() {
-    arrValues.sort();
+    arrValues.sort(compareNumbers);
     least = arrValues[0];
     alert('Least: ' + least);
 }
 
 function determineGreatest() {
     arrValues.sort();
-    greatest = arrValues[4];
+    arrValues.reverse();
+    greatest = arrValues[0];
     alert('Greatest: ' + greatest);
 }
 
