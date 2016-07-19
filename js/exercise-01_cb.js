@@ -1,16 +1,17 @@
-const OPERATION_TYPE_LEAST = 'operationTypeLeast';
+const OPERATION_TYPE_LEAST    = 'operationTypeLeast';
 const OPERATION_TYPE_GREATEST = 'operationTypeGreatest';
-const OPERATION_TYPE_MEAN = 'operationTypeMean';
-const OPERATION_TYPE_SUM = 'operationTypeSum';
-const OPERATION_TYPE_PRODUCT = 'operationTypeProduct';
+const OPERATION_TYPE_MEAN     = 'operationTypeMean';
+const OPERATION_TYPE_SUM      = 'operationTypeSum';
+const OPERATION_TYPE_PRODUCT  = 'operationTypeProduct';
+const EMPTY_STRING = '';
 
 var operationType;
 
-var val0;
-var val1;
-var val2;
-var val3;
-var val4;
+var val0 = EMPTY_STRING;
+var val1 = EMPTY_STRING;
+var val2 = EMPTY_STRING;
+var val3 = EMPTY_STRING;
+var val4 = EMPTY_STRING;
 var arrValues;
 
 var least;
@@ -20,18 +21,53 @@ var sum;
 var product;
 
 
-function onSubmitButtonPressed() {
+function onSubmit() {
     event.preventDefault();
-    operationType = $('#selectOperation').val();
-    
+    grabEntries();
+    arrValues = [val0, val1, val2, val3, val4];
+    mathSwitch();
+}
+
+function grabEntries() {
     val0 = parseInt($('#inp0').val());
     val1 = parseInt($('#inp1').val());
     val2 = parseInt($('#inp2').val());
     val3 = parseInt($('#inp3').val());
     val4 = parseInt($('#inp4').val());
-    
-    arrValues = [val0, val1, val2, val3, val4];
+}
 
+function didUserProvideValues() {
+    return (null != val0 && EMPTY_STRING != val0 && 
+            null != val1 && EMPTY_STRING != val1 &&
+            null != val2 && EMPTY_STRING != val2 &&
+            null != val3 && EMPTY_STRING != val3 &&
+            null != val4 && EMPTY_STRING != val4);
+}
+
+function didUserRunProgram() {
+    var outputMessage = $('#output').text();
+    return EMPTY_STRING != outputMessage;
+}
+
+/* generate a new result for different type of operation
+   only if the user has entered value and a result exists */
+function onSelectChanged() {
+    if (didUserProvideValues() && didUserRunProgram()) {
+        mathSwitch();
+    }
+}
+
+
+function sortNumericAscending(a, b) {
+    return a - b;
+}
+
+function sortNumericDescending(a, b) {
+    return b - a;
+}
+
+function mathSwitch() {
+    operationType = $('#selectOperation').val();
     switch(operationType) {
         case OPERATION_TYPE_LEAST:
             determineLeast();
@@ -53,21 +89,16 @@ function onSubmitButtonPressed() {
     }
 }
 
-function compareNumbers(a, b) {
-    return a - b;
-}
-
 function determineLeast() {
-    arrValues.sort(compareNumbers);
+    arrValues.sort(sortNumericAscending);
     least = arrValues[0];
-    alert('Least: ' + least);
+    $('#output').text('Least: ' + least);
 }
 
 function determineGreatest() {
-    arrValues.sort(compareNumbers);
-    arrValues.reverse();
+    arrValues.sort(sortNumericDescending);
     greatest = arrValues[0];
-    alert('Greatest: ' + greatest);
+    $('#output').text('Greatest: ' + greatest);
 }
 
 function determineMean() {
@@ -76,7 +107,7 @@ function determineMean() {
         mean += arrValues[i];
     }
     mean /= arrValues.length;
-    alert('Mean: ' + mean);
+    $('#output').text('Mean: ' + mean);
 }
 
 function determineSum() {
@@ -84,7 +115,7 @@ function determineSum() {
     for (var i=0; i < arrValues.length; i++) {
         sum += arrValues[i];
     }
-    alert('Sum: ' + sum);
+    $('#output').text('Sum: ' + sum);
 }
 
 function determineProduct() {
@@ -92,5 +123,14 @@ function determineProduct() {
     for (var i=0; i < arrValues.length; i++) {
         product *= arrValues[i];
     }
-    alert('Product: ' + product);
+    $('#output').text('Product: ' + product);
+}
+
+function onReset() {
+    $('#inp0').val(EMPTY_STRING);
+    $('#inp1').val(EMPTY_STRING);
+    $('#inp2').val(EMPTY_STRING);
+    $('#inp3').val(EMPTY_STRING);
+    $('#inp4').val(EMPTY_STRING);
+    $('#output').text(EMPTY_STRING);
 }

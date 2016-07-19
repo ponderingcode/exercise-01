@@ -11,8 +11,8 @@
         <button type="button" class="" data-toggle="modal" data-target="#modal">Launch</button>
 
         <!-- BEGIN modal -->
-        <div class="modal fade in modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" >
-            <div class="modal-dialog">
+        <div class="modal fade in modal-xl" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width:925px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -21,13 +21,13 @@
                     <div class="modal-body no-left-right-padding">
                         <div class="row">
                             <!-- BEGIN left half of modal -->
-                            <div class="col-md-10">
+                            <div class="col-md-4">
                                 <form id="form" class="form-horizontal no-padding-no-margin">
                                     <fieldset class="no-padding-no-margin">
                                         <!-- selectOperation -->
                                         <div class="form-group">
-                                            <div class="col-md-4 col-centered no-padding-no-margin">
-                                                <select id="selectOperation" name="selectOperation" class="form-control">
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
+                                                <select id="selectOperation" name="selectOperation" class="form-control" onchange="onSelectChanged()">
                                                     <option value="operationTypeLeast">Least</option>
                                                     <option value="operationTypeGreatest">Greatest</option>
                                                     <option value="operationTypeMean">Mean</option>
@@ -39,56 +39,51 @@
 
                                         <!-- inp0 -->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label" for="inp0"></label>  
-                                            <div class="col-md-4">
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
                                                 <input id="inp0" name="inp0" type="text" placeholder="number 1 of 5" class="form-control input-md" required="">
                                             </div>
                                         </div>
 
                                         <!-- inp1 -->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label" for="inp1"></label>  
-                                            <div class="col-md-4">
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
                                                 <input id="inp1" name="inp1" type="text" placeholder="number 2 of 5" class="form-control input-md" required="">
                                             </div>
                                         </div>
 
                                         <!-- inp2 -->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label" for="inp2"></label>  
-                                            <div class="col-md-4">
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
                                                 <input id="inp2" name="inp2" type="text" placeholder="number 3 of 5" class="form-control input-md" required="">
                                             </div>
                                         </div>
 
                                         <!-- inp3 -->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label" for="inp3"></label>  
-                                            <div class="col-md-4">
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
                                                 <input id="inp3" name="inp3" type="text" placeholder="number 4 of 5" class="form-control input-md" required="">
                                             </div>
                                         </div>
 
                                         <!-- inp4 -->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label" for="inp4"></label>  
-                                            <div class="col-md-4">
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
                                                 <input id="inp4" name="inp4" type="text" placeholder="number 5 of 5" class="form-control input-md" required="">
                                             </div>
                                         </div>
 
                                         <!-- btnSubmit -->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label" for="btnSubmit"></label>
-                                            <div class="col-md-4">
-                                                <button id="btnSubmit" name="btnSubmit" class="btn btn-primary" onclick="onSubmitButtonPressed()">Submit</button>
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
+                                                <button id="btnSubmit" name="btnSubmit" class="btn btn-primary" onclick="onSubmit()">Submit</button>
+                                                <button id="btnReset" name="btnReset" class="btn btn-danger" onclick="onReset()">Reset</button>
                                             </div>
                                         </div>
                                         
                                         <!-- output -->
                                         <div class="form-group">
                                             <div class="col-md-10 col-centered no-padding-no-margin">
-                                                <span id="output" class="output">&nbsp;</span>
+                                                <span id="output" class="output"></span>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -103,20 +98,21 @@
                             <div class="col-md-8">
                                 <!-- Prism syntax highlighting -->
                                 <div class="col-md-11 col-centered">
-<pre class="line-numbers" style="width: 530px; height:300px;">
-<code class="language-javascript">const OPERATION_TYPE_LEAST = 'operationTypeLeast';
+<pre class="line-numbers" style="width:550px; height:350px;">
+<code class="language-javascript">const OPERATION_TYPE_LEAST    = 'operationTypeLeast';
 const OPERATION_TYPE_GREATEST = 'operationTypeGreatest';
-const OPERATION_TYPE_MEAN = 'operationTypeMean';
-const OPERATION_TYPE_SUM = 'operationTypeSum';
-const OPERATION_TYPE_PRODUCT = 'operationTypeProduct';
+const OPERATION_TYPE_MEAN     = 'operationTypeMean';
+const OPERATION_TYPE_SUM      = 'operationTypeSum';
+const OPERATION_TYPE_PRODUCT  = 'operationTypeProduct';
+const EMPTY_STRING = '';
 
 var operationType;
 
-var val0;
-var val1;
-var val2;
-var val3;
-var val4;
+var val0 = EMPTY_STRING;
+var val1 = EMPTY_STRING;
+var val2 = EMPTY_STRING;
+var val3 = EMPTY_STRING;
+var val4 = EMPTY_STRING;
 var arrValues;
 
 var least;
@@ -126,18 +122,53 @@ var sum;
 var product;
 
 
-function onSubmitButtonPressed() {
+function onSubmit() {
     event.preventDefault();
-    operationType = $('#selectOperation').val();
-    
+    grabEntries();
+    arrValues = [val0, val1, val2, val3, val4];
+    mathSwitch();
+}
+
+function grabEntries() {
     val0 = parseInt($('#inp0').val());
     val1 = parseInt($('#inp1').val());
     val2 = parseInt($('#inp2').val());
     val3 = parseInt($('#inp3').val());
     val4 = parseInt($('#inp4').val());
-    
-    arrValues = [val0, val1, val2, val3, val4];
+}
 
+function didUserProvideValues() {
+    return (null != val0 && EMPTY_STRING != val0 && 
+            null != val1 && EMPTY_STRING != val1 &&
+            null != val2 && EMPTY_STRING != val2 &&
+            null != val3 && EMPTY_STRING != val3 &&
+            null != val4 && EMPTY_STRING != val4);
+}
+
+function didUserRunProgram() {
+    var outputMessage = $('#output').text();
+    return EMPTY_STRING != outputMessage;
+}
+
+/* generate a new result for different type of operation
+   only if the user has entered value and a result exists */
+function onSelectChanged() {
+    if (didUserProvideValues() && didUserRunProgram()) {
+        mathSwitch();
+    }
+}
+
+
+function sortNumericAscending(a, b) {
+    return a - b;
+}
+
+function sortNumericDescending(a, b) {
+    return b - a;
+}
+
+function mathSwitch() {
+    operationType = $('#selectOperation').val();
     switch(operationType) {
         case OPERATION_TYPE_LEAST:
             determineLeast();
@@ -159,21 +190,16 @@ function onSubmitButtonPressed() {
     }
 }
 
-function compareNumbers(a, b) {
-    return a - b;
-}
-
 function determineLeast() {
-    arrValues.sort(compareNumbers);
+    arrValues.sort(sortNumericAscending);
     least = arrValues[0];
-    alert('Least: ' + least);
+    $('#output').text('Least: ' + least);
 }
 
 function determineGreatest() {
-    arrValues.sort(compareNumbers);
-    arrValues.reverse();
+    arrValues.sort(sortNumericDescending);
     greatest = arrValues[0];
-    alert('Greatest: ' + greatest);
+    $('#output').text('Greatest: ' + greatest);
 }
 
 function determineMean() {
@@ -182,7 +208,7 @@ function determineMean() {
         mean += arrValues[i];
     }
     mean /= arrValues.length;
-    alert('Mean: ' + mean);
+    $('#output').text('Mean: ' + mean);
 }
 
 function determineSum() {
@@ -190,7 +216,7 @@ function determineSum() {
     for (var i=0; i < arrValues.length; i++) {
         sum += arrValues[i];
     }
-    alert('Sum: ' + sum);
+    $('#output').text('Sum: ' + sum);
 }
 
 function determineProduct() {
@@ -198,7 +224,16 @@ function determineProduct() {
     for (var i=0; i < arrValues.length; i++) {
         product *= arrValues[i];
     }
-    alert('Product: ' + product);
+    $('#output').text('Product: ' + product);
+}
+
+function onReset() {
+    $('#inp0').val(EMPTY_STRING);
+    $('#inp1').val(EMPTY_STRING);
+    $('#inp2').val(EMPTY_STRING);
+    $('#inp3').val(EMPTY_STRING);
+    $('#inp4').val(EMPTY_STRING);
+    $('#output').text(EMPTY_STRING);
 }
 </code>
 </pre>
