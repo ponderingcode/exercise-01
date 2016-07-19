@@ -2,86 +2,223 @@
 <html lang="en">
     <head>
         <title>exercise-01</title>
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+        <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+        <link href="prism/prism.css" rel="stylesheet" type="text/css">
+        <link href="css/style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <form class="form-horizontal">
-            <fieldset>
+        <!-- Button trigger modal -->
+        <button type="button" class="" data-toggle="modal" data-target="#modal">Launch</button>
 
-            <!-- Form Name -->
-                <legend></legend>
+        <!-- BEGIN modal -->
+        <div class="modal fade in modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modalLabel">Least, Greatest, Mean, Product, &amp; Sum</h4>
+                    </div>
+                    <div class="modal-body no-left-right-padding">
+                        <div class="row">
+                            <!-- BEGIN left half of modal -->
+                            <div class="col-md-10">
+                                <form id="form" class="form-horizontal no-padding-no-margin">
+                                    <fieldset class="no-padding-no-margin">
+                                        <!-- selectOperation -->
+                                        <div class="form-group">
+                                            <div class="col-md-4 col-centered no-padding-no-margin">
+                                                <select id="selectOperation" name="selectOperation" class="form-control">
+                                                    <option value="operationTypeLeast">Least</option>
+                                                    <option value="operationTypeGreatest">Greatest</option>
+                                                    <option value="operationTypeMean">Mean</option>
+                                                    <option value="operationTypeSum">Sum</option>
+                                                    <option value="operationTypeProduct">Product</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                <!-- Select Basic -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="selectOperation">Type of Operation</label>
-                  <div class="col-md-4">
-                    <select id="selectOperation" name="selectOperation" class="form-control">
-                      <option value="operationTypeLeast">Least</option>
-                      <option value="operationTypeGreatest">Greatest</option>
-                      <option value="operationTypeMean">Mean</option>
-                      <option value="operationTypeSum">Sum</option>
-                      <option value="operationTypeProduct">Product</option>
-                    </select>
-                  </div>
+                                        <!-- inp0 -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="inp0"></label>  
+                                            <div class="col-md-4">
+                                                <input id="inp0" name="inp0" type="text" placeholder="number 1 of 5" class="form-control input-md" required="">
+                                            </div>
+                                        </div>
+
+                                        <!-- inp1 -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="inp1"></label>  
+                                            <div class="col-md-4">
+                                                <input id="inp1" name="inp1" type="text" placeholder="number 2 of 5" class="form-control input-md" required="">
+                                            </div>
+                                        </div>
+
+                                        <!-- inp2 -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="inp2"></label>  
+                                            <div class="col-md-4">
+                                                <input id="inp2" name="inp2" type="text" placeholder="number 3 of 5" class="form-control input-md" required="">
+                                            </div>
+                                        </div>
+
+                                        <!-- inp3 -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="inp3"></label>  
+                                            <div class="col-md-4">
+                                                <input id="inp3" name="inp3" type="text" placeholder="number 4 of 5" class="form-control input-md" required="">
+                                            </div>
+                                        </div>
+
+                                        <!-- inp4 -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="inp4"></label>  
+                                            <div class="col-md-4">
+                                                <input id="inp4" name="inp4" type="text" placeholder="number 5 of 5" class="form-control input-md" required="">
+                                            </div>
+                                        </div>
+
+                                        <!-- btnSubmit -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="btnSubmit"></label>
+                                            <div class="col-md-4">
+                                                <button id="btnSubmit" name="btnSubmit" class="btn btn-primary" onclick="onSubmitButtonPressed()">Submit</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- output -->
+                                        <div class="form-group">
+                                            <div class="col-md-10 col-centered no-padding-no-margin">
+                                                <span id="output" class="output">&nbsp;</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            <!-- END left half of modal -->
+                            </div>
+                            
+                            <!-- BEGIN right half of modal -->
+                            <!-- Pardon the messy look of this section -->
+                            <!-- the indentation (or lack thereof) is necesssary -->  
+                            <!-- for syntax highlighting to display correctly -->
+                            <div class="col-md-8">
+                                <!-- Prism syntax highlighting -->
+                                <div class="col-md-11 col-centered">
+<pre class="line-numbers" style="width: 530px; height:300px;">
+<code class="language-javascript">const OPERATION_TYPE_LEAST = 'operationTypeLeast';
+const OPERATION_TYPE_GREATEST = 'operationTypeGreatest';
+const OPERATION_TYPE_MEAN = 'operationTypeMean';
+const OPERATION_TYPE_SUM = 'operationTypeSum';
+const OPERATION_TYPE_PRODUCT = 'operationTypeProduct';
+
+var operationType;
+
+var val0;
+var val1;
+var val2;
+var val3;
+var val4;
+var arrValues;
+
+var least;
+var greatest;
+var mean;
+var sum;
+var product;
+
+
+function onSubmitButtonPressed() {
+    event.preventDefault();
+    operationType = $('#selectOperation').val();
+    
+    val0 = parseInt($('#inp0').val());
+    val1 = parseInt($('#inp1').val());
+    val2 = parseInt($('#inp2').val());
+    val3 = parseInt($('#inp3').val());
+    val4 = parseInt($('#inp4').val());
+    
+    arrValues = [val0, val1, val2, val3, val4];
+
+    switch(operationType) {
+        case OPERATION_TYPE_LEAST:
+            determineLeast();
+            break;
+        case OPERATION_TYPE_GREATEST:
+            determineGreatest();
+            break;
+        case OPERATION_TYPE_MEAN:
+            determineMean();
+            break;
+        case OPERATION_TYPE_SUM:
+            determineSum();
+            break;
+        case OPERATION_TYPE_PRODUCT:
+            determineProduct();
+            break;
+        default:
+            break;
+    }
+}
+
+function compareNumbers(a, b) {
+    return a - b;
+}
+
+function determineLeast() {
+    arrValues.sort(compareNumbers);
+    least = arrValues[0];
+    alert('Least: ' + least);
+}
+
+function determineGreatest() {
+    arrValues.sort(compareNumbers);
+    arrValues.reverse();
+    greatest = arrValues[0];
+    alert('Greatest: ' + greatest);
+}
+
+function determineMean() {
+    mean = 0;
+    for (var i=0; i < arrValues.length; i++) {
+        mean += arrValues[i];
+    }
+    mean /= arrValues.length;
+    alert('Mean: ' + mean);
+}
+
+function determineSum() {
+    sum = 0;
+    for (var i=0; i < arrValues.length; i++) {
+        sum += arrValues[i];
+    }
+    alert('Sum: ' + sum);
+}
+
+function determineProduct() {
+    product = 1;
+    for (var i=0; i < arrValues.length; i++) {
+        product *= arrValues[i];
+    }
+    alert('Product: ' + product);
+}
+</code>
+</pre>
+        </div>
+                            <!-- END right half of modal -->
+                            </div>
+                        <!-- END row -->
+                        </div>
+                    <!-- END modal body -->
+                    </div>
+                <!-- END modal content -->
                 </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="inp0"></label>  
-                  <div class="col-md-4">
-                  <input id="inp0" name="inp0" type="text" placeholder="number 1 of 5" class="form-control input-md" required="">
-
-                  </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="inp1"></label>  
-                  <div class="col-md-4">
-                  <input id="inp1" name="inp1" type="text" placeholder="number 2 of 5" class="form-control input-md" required="">
-
-                  </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="inp2"></label>  
-                  <div class="col-md-4">
-                  <input id="inp2" name="inp2" type="text" placeholder="number 3 of 5" class="form-control input-md" required="">
-
-                  </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="inp3"></label>  
-                  <div class="col-md-4">
-                  <input id="inp3" name="inp3" type="text" placeholder="number 4 of 5" class="form-control input-md" required="">
-
-                  </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="inp4"></label>  
-                  <div class="col-md-4">
-                  <input id="inp4" name="inp4" type="text" placeholder="number 5 of 5" class="form-control input-md" required="">
-
-                  </div>
-                </div>
-
-                <!-- Button -->
-                <div class="form-group">
-                  <label class="col-md-4 control-label" for="btnSubmit"></label>
-                  <div class="col-md-4">
-                    <button id="btnSubmit" name="btnSubmit" class="btn btn-primary" onclick="onSubmitButtonPressed()">Submit</button>
-                  </div>
-                </div>
-
-            </fieldset>
-        </form>
+            <!-- END modal dialog -->
+            </div>
+        <!-- END modal -->
+        </div>
+        
         <script src="js/exercise-01_cb.js" type="text/javascript"></script>
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+        <script src="prism/prism.js"></script>
     </body>
 </html>

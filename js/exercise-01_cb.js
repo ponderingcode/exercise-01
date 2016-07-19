@@ -21,6 +21,7 @@ var product;
 
 
 function onSubmitButtonPressed() {
+    event.preventDefault();
     operationType = $('#selectOperation').val();
     
     val0 = parseInt($('#inp0').val());
